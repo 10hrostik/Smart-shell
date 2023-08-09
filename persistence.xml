@@ -5,9 +5,12 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
     http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
     version="2.1">
-    <persistence-unit name="Venue" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="smart" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-
+        <class>com.api.model.user.User</class>
+        <class>com.api.model.adress.Country</class>
+        <class>com.api.model.adress.City</class>
+        <class>com.api.model.adress.Adress</class>
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver" />
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:8000/smart_db" />

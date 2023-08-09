@@ -7,7 +7,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @EnableMongoRepositories(basePackages = "com.api.repositories")
-@ComponentScan(basePackages = "com.api")
+@ComponentScan(basePackages = {"com.api.controllers", "com.api.services",
+		"com.api.repositories", "com.config"})
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 public class SmartServerApplication {
 
