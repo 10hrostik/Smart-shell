@@ -20,7 +20,7 @@ public class City {
     private Country country;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "city")
+    @OneToMany(mappedBy = "city", cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
     private Set<Adress> adresses;
 
     public Long getId() {

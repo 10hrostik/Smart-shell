@@ -16,8 +16,8 @@ public class UserRepository {
     @PersistenceContext
     private EntityManager em;
 
-    public User getUserByUsername(String username) {
-        return new User();
+    public User getUserByUsernameOrEmail(String credential) {
+        return (User) getUsernameOrEmailQuery(credential).getSingleResult();
     }
 
     @Transactional
@@ -25,16 +25,32 @@ public class UserRepository {
         em.persist(user);
     }
 
+    @Transactional
+    public void update(User user) {
+        em.merge(user);
+    }
+
+    public User findById(Long id) {
+        return em.find(User.class, id);
+    }
+
+    public void delete(Long id) {
+        em.remove(findById(id));
+    }
+
     public boolean isUser(String username, String email) {
+        return !getUsernameOrEmailQuery(username, email).getResultList().isEmpty();
+    }
+
+    private Query getUsernameOrEmailQuery(String... credential) {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
         Root<User> root = criteriaQuery.from(User.class);
-        Predicate equalUsername = criteriaBuilder.equal(root.get("username"), username);
-        Predicate equalEmail = criteriaBuilder.equal(root.get("email"), email);
+        Predicate equalUsername = criteriaBuilder.equal(root.get("username"), credential[0]);
+        Predicate equalEmail = criteriaBuilder.equal(root.get("email"), credential[credential.length - 1]);
         criteriaQuery.select(root)
                 .where(criteriaBuilder.or(equalUsername, equalEmail));
 
-        Query query = em.createQuery(criteriaQuery);
-        return !query.getResultList().isEmpty();
+        return em.createQuery(criteriaQuery);
     }
 }

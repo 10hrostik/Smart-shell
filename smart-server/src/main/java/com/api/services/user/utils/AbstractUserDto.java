@@ -2,6 +2,7 @@ package com.api.services.user.utils;
 
 public abstract class AbstractUserDto {
     private String username;
+
     private String password;
 
     public String getUsername() {

@@ -31,7 +31,20 @@ public class UserDtoBuilder {
         userDto.setPhoneNumber(user.getPhoneNumber());
         userDto.setLoginDate(user.getLoginDate());
         userDto.setRole(user.getAuthorities().stream().findFirst().get().toString());
+        userDto.setCountry(user.getCountry().getName());
+        userDto.setCity(user.getCity().getName());
+        userDto.setAdress(user.getAdress().getAdress());
 
         return userDto;
+    }
+
+    public static ResponseUserDto editEntity(EditUserDto userDto, User user) {
+        user.setUsername(userDto.getUsername());
+        user.setName(userDto.getName());
+        user.setSurname(userDto.getSurname());
+        user.setEmail(userDto.getEmail());
+        user.setPhoneNumber(user.getPhoneNumber());
+
+        return userEntityToResponseUserDto(user);
     }
 }

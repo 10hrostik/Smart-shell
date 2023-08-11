@@ -4,10 +4,20 @@ import java.sql.Date;
 
 public class ResponseUserDto extends AbstractUserDto{
     private Long id;
+
     private String email;
+
     private String role;
+
     private Long phoneNumber;
+
     private Date loginDate;
+
+    private String country;
+
+    private String city;
+
+    private String adress;
 
     public Long getId() {
         return id;
@@ -47,5 +57,29 @@ public class ResponseUserDto extends AbstractUserDto{
 
     public void setLoginDate(Date loginDate) {
         this.loginDate = loginDate;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
     }
 }

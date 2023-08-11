@@ -16,7 +16,7 @@ public class Country {
     private String name;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "country")
+    @OneToMany(mappedBy = "country", cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
     private Set<City> cities;
 
     public Long getId() {
